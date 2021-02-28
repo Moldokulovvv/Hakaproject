@@ -1,27 +1,7 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}dsf{% endblock title %}
+{% block body %}
 {% load static %}
-<html lang="en">
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
-    <title>Musica - Music Template</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
-
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-
-</head>
-
-<body>
     <!-- ##### Preloader ##### -->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="circle-preloader">
@@ -57,20 +37,17 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
                                     <li><a href="about-us.html">About us</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about-us.html">About Us</a></li>
-                                            <li><a href="concert-tours.html">Concert &amp; Tours</a></li>
-                                            <li><a href="blog.html">News</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="elements.html">Elements</a></li>
+                                            {% for category in categories %}
+                                            <li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
+                                            {% endfor %}
                                         </ul>
                                     </li>
                                     <li><a href="#">Mega Menu</a>
-                                        <div class="megamenu">
+                                        <div class="dropdown">
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="index.html">Home</a></li>
                                                 <li><a href="about-us.html">About Us</a></li>
@@ -79,30 +56,7 @@
                                                 <li><a href="contact.html">Contact</a></li>
                                                 <li><a href="elements.html">Elements</a></li>
                                             </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="concert-tours.html">Concert &amp; Tours</a></li>
-                                                <li><a href="blog.html">News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="concert-tours.html">Concert &amp; Tours</a></li>
-                                                <li><a href="blog.html">News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="concert-tours.html">Concert &amp; Tours</a></li>
-                                                <li><a href="blog.html">News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
+
                                         </div>
                                     </li>
                                     <li><a href="concert-tours.html">Gallery</a></li>
@@ -130,7 +84,7 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img bg-overlay2">
+        <div class="breadcumb-area bg-img bg-overlay2" style="background-image: url({{ category.image.url }});">
         <div class="bradcumbContent">
             <h2>{{ category.name }}</h2>
         </div>
@@ -144,110 +98,55 @@
         <div class="container">
             <div class="row">
 
-                <!-- ========== Buttons ========== -->
+
+            <!-- ##### Upcoming Shows Area Start ##### -->
+    <div class="upcoming-shows-area section-padding-100">
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
-                    <div class="elements-title mb-50">
-                        <h2>Buttons</h2>
-                    </div>
-                    <!-- Buttons -->
-                    <div class="musica-buttons-area mb-100">
-                        <a href="#" class="btn musica-btn m-2">Send</a>
-                        <a href="#" class="btn musica-btn btn-2 m-2">Send</a>
-                        <a href="#" class="btn musica-btn btn-3 m-2">Send</a>
+                    <div class="section-heading">
+                        <h2>Upcoming shows</h2>
+                        <h6>Sed porta cursus enim, vitae maximus felis luctus iaculis.</h6>
                     </div>
                 </div>
+            </div>
 
-                <!-- ========== Progress Bars & Accordions ========== -->
+            <div class="row">
                 <div class="col-12">
-                    <div class="elements-title mb-50">
-                        <h2>Accordians &amp; Tabs</h2>
-                    </div>
-                </div>
-
-                <!-- ##### Accordians ##### -->
-                <div class="col-12 col-lg-6">
-                    <div class="accordions mb-100" id="accordion" role="tablist" aria-multiselectable="true">
-                        <!-- single accordian area -->
-                        <div class="panel single-accordion">
-                            <h6><a role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Mauris diam dui, tristique sed, lobortis eget metus.
-                                    <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                    <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                    </a></h6>
-                            <div id="collapseOne" class="accordion-content collapse show">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
+                    <!-- Upcoming Shows Content -->
+                    <div class="upcoming-shows-content">
+                        {% for ticket in tickets %}
+                        <!-- Single Upcoming Shows -->
+                        <div class="single-upcoming-shows d-flex align-items-center flex-wrap">
+                            <div class="shows-date">
+                                <h2>17 <span>July</span></h2>
                             </div>
-                        </div>
-                        <!-- single accordian area -->
-                        <div class="panel single-accordion">
-                            <h6>
-                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">Dui, tristique sed posuere hendrerit, lobortis eget metus.
-                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                        </a>
-                            </h6>
-                            <div id="collapseTwo" class="accordion-content collapse">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
-                            </div>
-                        </div>
-                        <!-- single accordian area -->
-                        <div class="panel single-accordion">
-                            <h6>
-                                <a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Dui, tristique sed posuere hendrerit, lobortis eget metus.
-                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                    </a>
-                            </h6>
-                            <div id="collapseThree" class="accordion-content collapse">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- ##### Tabs ##### -->
-                <div class="col-12 col-lg-6">
-                    <div class="musica-tabs-content">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab--1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Mauris diam</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab--2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Ttristique sed posuere</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" id="tab--3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="true">Lobortis eget metus</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content mb-100" id="myTabContent">
-                            <div class="tab-pane fade" id="tab1" role="tabpanel" aria-labelledby="tab--1">
-                                <div class="musica-tab-content">
-                                    <!-- Tab Text -->
-                                    <div class="musica-tab-text">
-                                        <p><span>1.</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia natus ut nemo rerum commodi facere culpa nisi temporibus magnam explicabo. Amet enim iure quo dignissimos, optio molestias officia asperiores voluptas possimus ullam sed est atque nulla ab fugit commodi cumque tempora et labore maiores doloremque voluptatibus quam, fugiat, assumenda. Eaque.</p>
-                                    </div>
+                            <div class="shows-desc d-flex align-items-center">
+                                <div class="shows-img">
+                                    <img src="{{ ticket.image.url }}" alt="">
+                                </div>
+                                <div class="shows-name">
+                                    <h6> <a href="{% url 'detail' ticket.id %}">{{ ticket }}</a></h6>
+                                    <p>{{ ticket.location }}</p>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab--2">
-                                <div class="musica-tab-content">
-                                    <!-- Tab Text -->
-                                    <div class="musica-tab-text">
-                                        <p><span>2.</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed maxime ab voluptatem magnam numquam quidem totam architecto, voluptatum optio debitis laborum nisi, fugiat obcaecati quaerat explicabo molestias rem dolor? Doloribus rerum, aliquid, aliquam cupiditate repellat ipsum suscipit ipsam vitae eos quo, eligendi sapiente quisquam placeat aperiam inventore tenetur accusantium, debitis!</p>
-                                    </div>
-                                </div>
+                            <div class="shows-location">
+                                <p>{{ ticket.description }}</p>
                             </div>
-                            <div class="tab-pane fade show active" id="tab3" role="tabpanel" aria-labelledby="tab--3">
-                                <div class="musica-tab-content">
-                                    <!-- Tab Text -->
-                                    <div class="musica-tab-text">
-                                        <p><span>3.</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga rerum error, inventore, debitis cum repellendus excepturi autem animi iste deleniti labore iure voluptatum eligendi, temporibus aperiam, accusantium? Asperiores iusto quia minus, laborum delectus voluptatem nemo iste in. Suscipit minus voluptatem sint quod, deserunt saepe nihil consequatur assumenda modi incidunt similique, qui soluta corporis dolores. Aliquid!</p>
-                                    </div>
-                                </div>
+                            <div class="shows-time">
+                                <p>{{ ticket.time }}</p>
+                            </div>
+                            <div class="buy-tickets">
+                                <a href="" class="btn musica-btn">Buy Tikets</a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        {% endfor %}
+
+
+
+
+
+
 
                 <!-- ========== Loaders ========== -->
                 <div class="col-12">
@@ -393,45 +292,6 @@
                 <div class="col-12">
                     <div class="row">
 
-                        <!-- Single Service Area -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-service-area mb-100">
-                                <div class="course-title d-flex align-items-end">
-                                    <span>01</span>
-                                    <h4>Great Services</h4>
-                                </div>
-                                <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Service Area -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-service-area mb-100">
-                                <div class="course-title d-flex align-items-end">
-                                    <span>02</span>
-                                    <h4>Amazing Music</h4>
-                                </div>
-                                <p>Posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Service Area -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-service-area mb-100">
-                                <div class="course-title d-flex align-items-end">
-                                    <span>03</span>
-                                    <h4>Great Services</h4>
-                                </div>
-                                <p>Nulla massa dui, posuere non erat in, eleifend mattis dui. Vivamus luctus luctus rhoncus. Donec sagittis nulla id finibus iaculis. Mauris odio tortor.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Elements Area End ***** -->
 
     <!-- ##### CTA Area Start ##### -->
     <div class="musica-cta-area section-padding-100 bg-img bg-overlay2" style="background-image: url(static/img/blog-img/4.jpg);">
@@ -539,17 +399,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!-- ##### Footer Area Start ##### -->
 
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
-    <!-- Popper js -->
-    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
-    <!-- Bootstrap js -->
-    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
-    <!-- All Plugins js -->
-    <script src="{% static 'js/plugins/plugins.js' %}"></script>
-    <!-- Active js -->
-    <script src="{% static 'js/active.js' %}"></script>
-</body>
 
-</html>
+{% endblock %}

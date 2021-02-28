@@ -1,5 +1,6 @@
 from django.db import models
 
+
 from account.models import User
 
 
@@ -17,8 +18,8 @@ class Ticket(models.Model):
     description = models.TextField()
     location = models.TextField()
     time = models.TimeField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='recipes')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='tickets')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tickets')
     created = models.DateTimeField()
     image = models.ImageField(upload_to='tickets')
 

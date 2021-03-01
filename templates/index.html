@@ -58,7 +58,7 @@
                                 <ul>
                                     <li><a href="{% url 'home' %}">Home</a></li>
                                     <li><a href="about-us.html">About us</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="#">Categories</a>
                                         <ul class="dropdown">
                                             {% for category in categories %}
                                             <li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
@@ -68,8 +68,8 @@
                                     <li><a href="{% url 'search' %}">Search</a>
 
                                     </li>
-                                    <li><a href="concert-tours.html">Gallery</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="concert-tours.html">Login</a></li>
+                                    <li><a href="contact.html">Logout</a></li>
                                 </ul>
 
                                 <!-- Social Button -->

@@ -35,32 +35,28 @@
                             </div>
 
                             <!-- Nav Start -->
+                            <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
                                     <li><a href="{% url 'home' %}">Home</a></li>
                                     <li><a href="about-us.html">About us</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="#">Categories</a>
                                         <ul class="dropdown">
                                             {% for category in categories %}
                                             <li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     </li>
-                                    <li><a href="#">Mega Menu</a>
-                                        <div class="dropdown">
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="concert-tours.html">Concert &amp; Tours</a></li>
-                                                <li><a href="blog.html">News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
+                                    <li><a href="{% url 'search' %}">Search</a>
 
-                                        </div>
                                     </li>
-                                    <li><a href="concert-tours.html">Gallery</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    {% if user.is_authenticated %}
+                                    <a style="color: white" href="url 'home' ">{{ user.email }}</a>
+                                     <a style="color: white" href="{% url 'logout' %}">Logout</a>
+                                    {% else %}
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                    {% endif %}
                                 </ul>
 
                                 <!-- Social Button -->
@@ -126,18 +122,28 @@
                                     <img src="{{ ticket.image.url }}" alt="">
                                 </div>
                                 <div class="shows-name">
-                                    <h6> <a href="{% url 'detail' ticket.id %}">{{ ticket }}</a></h6>
+                                    <h6> <a style="color: white" href="{% url 'detail' ticket.id %}">{{ ticket }}</a></h6>
                                     <p>{{ ticket.location }}</p>
                                 </div>
                             </div>
                             <div class="shows-location">
                                 <p>{{ ticket.description }}</p>
                             </div>
+
                             <div class="shows-time">
                                 <p>{{ ticket.time }}</p>
                             </div>
                             <div class="buy-tickets">
-                                <a href="" class="btn musica-btn">Buy Tikets</a>
+                                {% if user.is_authenticated %}
+                                <form action="{% url 'cart_add' ticket.id %}" method="post">
+                                    {{ cart_ticket_form }}
+                                {% csrf_token %}
+<!--                                    <a href="" class="btn musica-btn">Buy Tikets</a>-->
+                                <input type="submit" class="btn musica-btn" value="Buy Tikets">
+                            </form>
+                                {% else %}
+                                <a href="{% url 'login' %}" class="btn musica-btn">Buy Tikets</a>
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
@@ -148,72 +154,7 @@
 
 
 
-                <!-- ========== Loaders ========== -->
-                <div class="col-12">
-                    <div class="elements-title mb-50">
-                        <h2>Loaders</h2>
-                    </div>
-                </div>
 
-                <div class="col-12">
-                    <!-- Loaders Area Start -->
-                    <div class="our-skills-area">
-                        <div class="row">
-
-                            <!-- Single Skills Area -->
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <div class="single-skils-area mb-100">
-                                    <div id="circle" class="circle" data-value="0.75">
-                                        <div class="skills-text">
-                                            <span>75%</span>
-                                        </div>
-                                    </div>
-                                    <h5>Festivals</h5>
-                                    <p>Maecenas id ultrices</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Skills Area -->
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <div class="single-skils-area mb-100">
-                                    <div id="circle2" class="circle" data-value="0.83">
-                                        <div class="skills-text">
-                                            <span>83%</span>
-                                        </div>
-                                    </div>
-                                    <h5>Concerts</h5>
-                                    <p>Sancenas diultrices</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Skills Area -->
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <div class="single-skils-area mb-100">
-                                    <div id="circle3" class="circle" data-value="0.25">
-                                        <div class="skills-text">
-                                            <span>25%</span>
-                                        </div>
-                                    </div>
-                                    <h5>Conference</h5>
-                                    <p>Maecenas id ultrices</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Skills Area -->
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <div class="single-skils-area mb-100">
-                                    <div id="circle4" class="circle" data-value="0.82">
-                                        <div class="skills-text">
-                                            <span>82%</span>
-                                        </div>
-                                    </div>
-                                    <h5>New artists</h5>
-                                    <p>Sancenas diultrices</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- ========== Milestones ========== -->
                 <div class="col-12">
@@ -233,8 +174,8 @@
                                         <img src="{% static 'img/core-img/microphone.png' %}" alt="">
                                     </div>
                                     <div class="scf-text">
-                                        <h2><span class="counter">149</span></h2>
-                                        <p>Concerts/Year</p>
+                                        <h2><span class="counter">{{ len_tickets }}</span></h2>
+                                        <p>Всего билетов</p>
                                     </div>
                                 </div>
                             </div>

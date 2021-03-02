@@ -38,7 +38,8 @@
                     <nav class="classy-navbar justify-content-between" id="musicaNav">
 
                         <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+<!--                        <a href="index.html" class="nav-brand"><img src="{% static 'img/index111.jpeg' %}" alt=""></a>-->
+                                <i class="fa fa-bolt fa-5x" aria-hidden="true" style="color:white" ></i>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -65,11 +66,15 @@
                                             {% endfor %}
                                         </ul>
                                     </li>
-                                    <li><a href="{% url 'search' %}">Search</a>
 
-                                    </li>
-                                    <li><a href="concert-tours.html">Login</a></li>
-                                    <li><a href="contact.html">Logout</a></li>
+                                    <li><a href="{% url 'home' %}?filter=new">New places</a></li>
+                                    {% if user.is_authenticated %}
+                                    <a style="color: white" href="{% url 'home' %}">{{ user.email }}</a>
+                                     <a style="color: white" href="{% url 'logout' %}">Logout</a>
+                                    {% else %}
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                    {% endif %}
                                 </ul>
 
                                 <!-- Social Button -->
@@ -102,8 +107,8 @@
                 <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-1.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
-                    <h2 data-animation="fadeInUp" data-delay="100ms">Makers <span>BootCamp</span></h2>
-                    <p data-animation="fadeInUp" data-delay="300ms">Makers BootCamp</p>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifest<span></span></h2>
+                    <p data-animation="fadeInUp" data-delay="300ms"></p>
                 </div>
                 <!-- Big Text -->
                 <h2 class="big-text">Musica</h2>
@@ -115,8 +120,8 @@
                 <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-2.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
-                    <h2 data-animation="fadeInUp" data-delay="100ms">Moldokulov <span>Adis</span></h2>
-                    <p data-animation="fadeInUp" data-delay="300ms">Moldokulov Adis</p>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifestival<span></span></h2>
+                    <p data-animation="fadeInUp" data-delay="300ms">tusa</p>
                 </div>
                 <!-- Big Text -->
                 <h2 class="big-text">Colorlib</h2>
@@ -128,7 +133,7 @@
                 <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-3.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
-                    <h2 data-animation="fadeInUp" data-delay="100ms">AmusiС<span>VK</span></h2>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifestival<span>VK</span></h2>
                     <p data-animation="fadeInUp" data-delay="300ms">My Project</p>
                 </div>
                 <!-- Big Text -->
@@ -149,16 +154,44 @@
 
 
     <!-- ##### Upcoming Shows Area Start ##### -->
+
     <div class="upcoming-shows-area section-padding-100">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading">
                         <h2>Upcoming shows</h2>
-                        <h6>Sed porta cursus enim, vitae maximus felis luctus iaculis.</h6>
+                        {% if user.is_staff or user.is_superuser %}
+                        <a href="{% url 'create-ticket' %}"><button type="button">Добавить билет</button> </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+
+            <div class="posts">
+    {% for ticket in tickets %}
+    <article class="search">
+      <a href="#" class="image"><img src="{{ ticket.image.url }}" /></a>
+       <h1>{{ ticket.title }}</h1>
+      <h4>{{ ticket.description }}</h4>
+        <li><a href="{% url 'detail' ticket.id %}" class="button">More</a></li>
+
+    </article>
+    {% endfor %}
+
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    {% if page_obj.has_previous %}
+    <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+    {% endif %}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{ page_obj.number }}</span>
+    </li>
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.next_page_number}}">{{ page_obj.next_page_number}}</a></li>
+    {% endif %}
+  </ul>
+</nav>
 
             <div class="row">
                 <div class="col-12">
@@ -593,9 +626,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         <div class="widget-title">
                             <h4>Subscribe</h4>
                         </div>
-                        <form action="#" method="post" class="subscribe-form">
-                            <input type="email" name="subscribe-email" id="subscribeemail">
-                            <button type="submit">subscribe</button>
+<!--                        <form action="#" method="get" class="subscribe-form">-->
+<!--                            <input type="email" name="subscribe-email" id="subscribeemail">-->
+<!--                            <button type="submit">subscribe</button>-->
+<!--                        </form>-->
+                        <form action="{% url 'search' %}" method="get">
+                            <input type="text" name="q" id="query" placeholder="Search" />
                         </form>
                     </div>
                 </div>

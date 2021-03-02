@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     #myapps
     'generic',
     'account',
+    'cart',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -151,7 +153,9 @@ EMAIL_HOST_USER = "adis.moldokulov@gmail.com"
 EMAIL_HOST_PASSWORD = "moldo275225"
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index-page'
-LOGOUT_REDIRECT_URL = 'index-page'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+CART_SESSION_ID = 'cart'
 
 

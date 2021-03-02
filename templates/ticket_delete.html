@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Удаление ticketa{% endblock %}
+{% load static %}
+{% block body %}
+<h1>Вы действительно хотите удалить?</h1>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Da</button>
+    <a href="{% url 'home' %}"><button type="button">No</button><a>
+</form>
+{% endblock body %}

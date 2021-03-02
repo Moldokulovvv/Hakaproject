@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Редактирование ticketa{% endblock title%}
+{% load static %}
+{% block body %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">СОхранить</button>
+</form>
+
+{% endblock body %}

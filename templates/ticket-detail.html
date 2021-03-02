@@ -20,7 +20,7 @@
                     <nav class="classy-navbar justify-content-between" id="musicaNav">
 
                         <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                        <a href="index.html" class="nav-brand"><img src="{{ category.image.url }}" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -36,32 +36,28 @@
                             </div>
 
                             <!-- Nav Start -->
+                            <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
                                     <li><a href="{% url 'home' %}">Home</a></li>
                                     <li><a href="about-us.html">About us</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="#">Categories</a>
                                         <ul class="dropdown">
                                             {% for category in categories %}
                                             <li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     </li>
-                                    <li><a href="#">Mega Menu</a>
-                                        <div class="dropdown">
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="concert-tours.html">Concert &amp; Tours</a></li>
-                                                <li><a href="blog.html">News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
+                                    <li><a href="{% url 'search' %}">Search</a>
 
-                                        </div>
                                     </li>
-                                    <li><a href="concert-tours.html">Gallery</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    {% if user.is_authenticated %}
+                                    <a style="color: white" href="url 'home' ">{{ user.email }}</a>
+                                     <a style="color: white" href="{% url 'logout' %}">Logout</a>
+                                    {% else %}
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                    {% endif %}
                                 </ul>
 
                                 <!-- Social Button -->
@@ -85,7 +81,7 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img bg-overlay2" style="background-image: url(static/img/bg-img/breadcumb.jpg);">
+    <div class="breadcumb-area bg-img bg-overlay2" style="background-image: url({{ ticket.image.url }});">
     </div>
     <!-- bg gradients -->
     <div class="bg-gradients"></div>
@@ -112,6 +108,10 @@
                             <li><div class="check"><img src="img/core-img/check.png" alt=""></div> Id purus eu lectus imperdiet var</li>
                             <li><div class="check"><img src="img/core-img/check.png" alt=""></div> Donec id purus eu lectus imperdiet varius</li>
                             <li><div class="check"><img src="img/core-img/check.png" alt=""></div> Id purus eu lectus imperdiet var</li>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'edit-ticket' ticket.id %}"><button type="button">Редактировать</button></a>
+                            <a href="{% url 'delete-ticket' ticket.id %}" role="button">Udalit</a>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
         </div>
     </div>
     <!-- ##### About Us Area End ##### -->
-
+<div class="container">
 {% with comments.count as total_comments %}
   <h2>
     {{ total_comments }} comment{{ total_comments|pluralize }}
@@ -127,6 +127,7 @@
 {% endwith %}
 
 {% for comment in comments %}
+
   <div class="comment">
     <p class="info">
       Comment {{ forloop.counter }} by {{ comment.name }}
@@ -138,6 +139,9 @@
   <p>There are no comments yet.</p>
 {% endfor %}
 
+
+
+{% if user.is_authenticated %}
 {% if new_comment %}
   <h2>Your comment has been added.</h2>
 {% else %}
@@ -148,152 +152,18 @@
     <p><input type="submit" value="Add comment"></p>
   </form>
 {% endif %}
-
-
-    <!-- ##### Career Timeline Area Start ##### -->
-    <div class="career-timeline-area section-padding-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading">
-                        <h2>My Life &amp; career</h2>
-                        <h6>Sed porta cursus enim, vitae maximus felis luctus iaculis.</h6>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-
-                    <!-- Single Timeline Area -->
-                    <div class="single-timeline-area d-flex">
-                        <!-- Timeline Date -->
-                        <div class="timeline-date">
-                            <h2>17 <span>July 1983</span></h2>
-                        </div>
-                        <!-- Timeline Content -->
-                        <div class="timeline-content">
-                            <h5>My childhood</h5>
-                            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
-                        </div>
-                    </div>
-
-                    <!-- Single Timeline Area -->
-                    <div class="single-timeline-area d-flex">
-                        <!-- Timeline Date -->
-                        <div class="timeline-date">
-                            <h2>25 <span>May 2004</span></h2>
-                        </div>
-                        <!-- Timeline Content -->
-                        <div class="timeline-content">
-                            <h5>Early career years</h5>
-                            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
-                        </div>
-                    </div>
-
-                    <!-- Single Timeline Area -->
-                    <div class="single-timeline-area d-flex">
-                        <!-- Timeline Date -->
-                        <div class="timeline-date">
-                            <h2>08 <span>May 2007</span></h2>
-                        </div>
-                        <!-- Timeline Content -->
-                        <div class="timeline-content">
-                            <h5>First Album Release</h5>
-                            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
-                        </div>
-                    </div>
-
-                    <!-- Single Timeline Area -->
-                    <div class="single-timeline-area d-flex">
-                        <!-- Timeline Date -->
-                        <div class="timeline-date">
-                            <h2>30 <span>May 2009</span></h2>
-                        </div>
-                        <!-- Timeline Content -->
-                        <div class="timeline-content">
-                            <h5>My First Live Concert</h5>
-                            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="timeline-btn text-center mt-100">
-                        <a href="#" class="btn musica-btn">Load More</a>
-                    </div>
-                </div>
-            </div>
-
+{% endif %}
         </div>
 
-        <!-- Side Thumbs -->
-        <div class="first-img">
-            <img src="img/bg-img/man.png" alt="">
-        </div>
-        <div class="second-img">
-            <img src="img/bg-img/microphone.png" alt="">
-        </div>
-    </div>
+
+
+
+
     <!-- ##### Career Timeline Area End ##### -->
 
-    <!-- ##### Discography Area Start ##### -->
-    <div class="discography-area section-padding-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading dark">
-                        <h2>discography</h2>
-                        <h6>Sed porta cursus enim, vitae maximus felis luctus iaculis.</h6>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <!-- Discography Slides -->
-                    <div class="discography-slides owl-carousel">
-                        <!-- Single Discography -->
-                        <div class="single-discography">
-                            <a href="#"><img src="img/bg-img/d1.jpg" alt=""></a>
-                        </div>
-
-                        <!-- Single Discography -->
-                        <div class="single-discography">
-                            <a href="#"><img src="img/bg-img/d2.jpg" alt=""></a>
-                        </div>
-
-                        <!-- Single Discography -->
-                        <div class="single-discography">
-                            <a href="#"><img src="img/bg-img/d3.jpg" alt=""></a>
-                        </div>
-
-                        <!-- Single Discography -->
-                        <div class="single-discography">
-                            <a href="#"><img src="img/bg-img/d4.jpg" alt=""></a>
-                        </div>
-
-                        <!-- Single Discography -->
-                        <div class="single-discography">
-                            <a href="#"><img src="img/bg-img/d5.jpg" alt=""></a>
-                        </div>
-
-                        <!-- Single Discography -->
-                        <div class="single-discography">
-                            <a href="#"><img src="img/bg-img/d6.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Discography Area End ##### -->
 
     <!-- ##### CTA Area Start ##### -->
-    <div class="musica-cta-area section-padding-100 bg-img bg-overlay2" style="background-image: url(img/bg-img/bg-8.jpg);">
+    <div class="musica-cta-area section-padding-100 bg-img bg-overlay2" style="background-image: url({{ ticket.image.url }});">
         <div class="container">
             <div class="row">
                 <div class="col-12">

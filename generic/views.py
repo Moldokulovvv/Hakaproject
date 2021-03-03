@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.utils import timezone
 
@@ -23,7 +24,14 @@ class MainPageView(ListView):
     model = Ticket
     template_name = 'index.html'
     context_object_name = 'tickets'
-    paginate_by = 3
+    paginate_by = 1
+
+    def get_template_names(self):
+        template_name = super(MainPageView, self).get_template_names()
+        filter = self.request.GET.get('filter')
+        if filter:
+            template_name = 'filter.html'
+        return template_name
 
 
 def get_queryset(self):
@@ -38,6 +46,16 @@ def get_queryset(self):
         queryset = queryset.filter(created__gte=start_date)
     return queryset
 
+def CategoryDetailView(request, *args, **kwargs):
+    category = kwargs.get('slug', None)
+    tickets = Ticket.objects.filter(category_id=category)
+    len_tickets = Ticket.objects.filter(category_id=category).count()
+    cart_ticket_form = CartAddTicketForm()
+    paginator = Paginator(tickets, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'category-detail.html', locals())
+
 
 
 
@@ -48,6 +66,8 @@ def category_detail(request, slug):
     len_tickets = Ticket.objects.filter(category_id=slug).count()
     cart_ticket_form = CartAddTicketForm()
     return render(request, 'category-detail.html', locals())
+
+
 
 # def ticket_detail(request, pk):
 #     ticket = get_object_or_404(Ticket, pk=pk)

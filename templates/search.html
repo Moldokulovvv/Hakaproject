@@ -3,21 +3,75 @@
 {% block title %}dsf{% endblock title %}
 {% load static %}
 {% block body %}
+ <!-- ##### Breadcumb Area Start ##### -->
+        <div class="breadcumb-area bg-img bg-overlay2" style="background-image: url({{ category.image.url }});">
+        <div class="bradcumbContent">
+            <h2>{{ category }}</h2>
+        </div>
+    </div>
+    <!-- bg gradients -->
+    <div class="bg-gradients"></div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Elements Area Start ##### -->
+    <section class="elements-area mt-30 section-padding-100-0">
+        <div class="container">
+            <div class="row">
+
+
+                 <!-- ##### Upcoming Shows Area Start ##### -->
+
+    <div class="upcoming-shows-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h2>Upcoming shows</h2>
+                        {% if user.is_staff or user.is_superuser %}
+                        <a href="{% url 'create-ticket' %}"><button type="button">Добавить билет</button> </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">
+                    <!-- Upcoming Shows Content -->
+                    <div class="upcoming-shows-content">
+
+                        {% for ticket in tickets %}
+                        <!-- Single Upcoming Shows -->
+                        <div class="single-upcoming-shows d-flex align-items-center flex-wrap">
+                            <div class="shows-date">
+                                <h2>17 <span>July</span></h2>
+                            </div>
+                            <div class="shows-desc d-flex align-items-center">
+                                <div class="shows-img">
+                                    <img src="{{ ticket.image.url }}" alt="">
+                                </div>
+                                <div class="shows-name">
+                                    <h6>{{ ticket.title }}</h6>
+                                    <p>Cluj, Romania</p>
+                                </div>
+                            </div>
+                            <div class="shows-location">
+                                <p>{{ ticket.description }}</p>
+                            </div>
+                            <div class="shows-time">
+                                <p>20:30</p>
+                            </div>
+                            <div class="buy-tickets">
+                                <a href="#" class="btn musica-btn">Buy Tikets</a>
+                            </div>
+                        </div>
+                         {% endfor %}
 
 
 <h1> Search results</h1>
 
-<div class="posts">
-    {% for ticket in tickets %}
-    <article class="search">
-      <a href="#" class="image"><img src="{{ ticket.image.url }}" /></a>
-       <h1>{{ ticket.title }}</h1>
-      <h4>{{ ticket.description }}</h4>
-        <li><a href="{% url 'detail' ticket.id %}" class="button">More</a></li>
 
-    </article>
-    {% endfor %}
 
-</div>
 
-    {% endblock %}
+
+    {% endblock body %}

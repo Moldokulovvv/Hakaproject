@@ -85,6 +85,7 @@
                                     <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a class="nav-link" href="{% url 'cart_detail' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
                                 </div>
 
                             </div>
@@ -104,7 +105,7 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-1.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/index02.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
                     <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifest<span></span></h2>
@@ -117,7 +118,7 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-2.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/index02.jpeg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
                     <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifestival<span></span></h2>
@@ -130,7 +131,7 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-3.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/index01.jpeg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
                     <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifestival<span>VK</span></h2>
@@ -168,30 +169,6 @@
                 </div>
             </div>
 
-            <div class="posts">
-    {% for ticket in tickets %}
-    <article class="search">
-      <a href="#" class="image"><img src="{{ ticket.image.url }}" /></a>
-       <h1>{{ ticket.title }}</h1>
-      <h4>{{ ticket.description }}</h4>
-        <li><a href="{% url 'detail' ticket.id %}" class="button">More</a></li>
-
-    </article>
-    {% endfor %}
-
-<nav aria-label="...">
-  <ul class="pagination pagination-lg">
-    {% if page_obj.has_previous %}
-    <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-    {% endif %}
-    <li class="page-item active" aria-current="page">
-      <span class="page-link">{{ page_obj.number }}</span>
-    </li>
-    {% if page_obj.has_next %}
-    <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.next_page_number}}">{{ page_obj.next_page_number}}</a></li>
-    {% endif %}
-  </ul>
-</nav>
 
             <div class="row">
                 <div class="col-12">

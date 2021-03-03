@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block body %}
+
+ <!-- ##### Breadcumb Area Start ##### -->
+        <div class="breadcumb-area bg-img bg-overlay2" style="background-image: url({{ category.image.url }});">
+        <div class="bradcumbContent">
+            <h2>{{ category }}</h2>
+        </div>
+    </div>
+    <!-- bg gradients -->
+    <div class="bg-gradients"></div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Elements Area Start ##### -->
+    <section class="elements-area mt-30 section-padding-100-0">
+        <div class="container">
+            <div class="row">
+
+    {% for ticket in tickets %}
+    <article class="search">
+      <a href="#" class="image"><img src="{{ ticket.image.url }}" style="width:400px; height:400px;" /></a>
+       <h1>{{ ticket.title }}</h1>
+      <h4>{{ ticket.description }}</h4>
+        <li><a href="{% url 'detail' ticket.id %}" class="button">More</a></li>
+
+    </article>
+    {% endfor %}
+
+<div class="section-title" data-aos="fade-up">
+    {% if page_obj.has_previous %}
+    <a href="{% url 'home' %}?filter=new?page={{ page_obj.previous_page_number }}"><button class="btn btn-dark">{{ page_obj.previous_page_number }}</button></a>
+    {% endif %}
+     <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+     </span>
+    {% if page_obj.has_next %}
+    <a href="{% url 'home' %}?filter=new?page={{ page_obj.next_page_number }}"><button class="btn btn-dark">{{ page_obj.next_page_number }}</button></a>
+    {% endif %}
+    </div>
+                {% endblock %}

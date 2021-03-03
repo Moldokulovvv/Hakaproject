@@ -24,7 +24,7 @@ class MainPageView(ListView):
     model = Ticket
     template_name = 'index.html'
     context_object_name = 'tickets'
-    paginate_by = 1
+    paginate_by = 100
 
     def get_template_names(self):
         template_name = super(MainPageView, self).get_template_names()
@@ -42,16 +42,15 @@ def get_queryset(self):
         queryset = queryset.filter(Q(title__icontains=search) |
                                    Q(description__icontains=search))
     elif filter:
-        start_date = timezone.now() - timedelta(hours=10)
+        start_date = timezone.now() - timedelta(hours=1)
         queryset = queryset.filter(created__gte=start_date)
     return queryset
 
 def CategoryDetailView(request, *args, **kwargs):
     category = kwargs.get('slug', None)
     tickets = Ticket.objects.filter(category_id=category)
-    len_tickets = Ticket.objects.filter(category_id=category).count()
-    cart_ticket_form = CartAddTicketForm()
     paginator = Paginator(tickets, 1)
+
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'category-detail.html', locals())
@@ -60,13 +59,13 @@ def CategoryDetailView(request, *args, **kwargs):
 
 
 
-def category_detail(request, slug):
-    category = Category.objects.get(slug=slug)
-    tickets = Ticket.objects.filter(category_id=slug)
-    len_tickets = Ticket.objects.filter(category_id=slug).count()
-    cart_ticket_form = CartAddTicketForm()
-    return render(request, 'category-detail.html', locals())
-
+# def category_detail(request, slug):
+#     category = Category.objects.get(slug=slug)
+#     tickets = Ticket.objects.filter(category_id=slug)
+#     len_tickets = Ticket.objects.filter(category_id=slug).count()
+#     cart_ticket_form = CartAddTicketForm()
+#     return render(request, 'category-detail.html', locals())
+#
 
 
 # def ticket_detail(request, pk):
@@ -101,6 +100,8 @@ def ticket_detail(request, pk):
     ticket = get_object_or_404(Ticket,pk=pk)
     # List of active comments for this post
     comments = ticket.comments.filter(active=True)
+    cart = CartAddTicketForm()
+
 
     if request.method == 'POST':
         # A comment was posted
@@ -119,7 +120,7 @@ def ticket_detail(request, pk):
                   'ticket-detail.html',
                  {'ticket': ticket,
                   'comments': comments,
-                  'comment_form': comment_form})
+                  'comment_form': comment_form, 'cart':cart})
 
 
 class IsAdminCheckMixin(UserPassesTestMixin):

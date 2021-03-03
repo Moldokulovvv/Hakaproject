@@ -85,7 +85,9 @@
                                     <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    {% if user.is_authenticated %}
                                     <a class="nav-link" href="{% url 'cart_detail' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
+                                     {% endif %}
                                 </div>
 
                             </div>
@@ -105,10 +107,10 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/index02.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-2.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
-                    <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifest<span></span></h2>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">Tickets.kg<span></span></h2>
                     <p data-animation="fadeInUp" data-delay="300ms"></p>
                 </div>
                 <!-- Big Text -->
@@ -118,10 +120,10 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/index02.jpeg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-1.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
-                    <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifestival<span></span></h2>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">BootCamp<span></span></h2>
                     <p data-animation="fadeInUp" data-delay="300ms">tusa</p>
                 </div>
                 <!-- Big Text -->
@@ -131,11 +133,11 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/index01.jpeg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-3.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="hero-slides-content text-center">
-                    <h2 data-animation="fadeInUp" data-delay="100ms">ka4elifestival<span>VK</span></h2>
-                    <p data-animation="fadeInUp" data-delay="300ms">My Project</p>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">Makers<span>VK</span></h2>
+                    <p data-animation="fadeInUp" data-delay="300ms"></p>
                 </div>
                 <!-- Big Text -->
                 <h2 class="big-text">Festival</h2>

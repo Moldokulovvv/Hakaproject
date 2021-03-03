@@ -4,10 +4,89 @@
 {% load static %}
 
 
+
+
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="circle-preloader">
+            <img src="{% static 'img/core-img/compact-disc.png' %}" alt="">
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="musica-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container-fluid">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="musicaNav">
+
+                        <!-- Nav brand -->
+<!--                        <a href="index.html" class="nav-brand"><img src="{% static 'img/index111.jpeg' %}" alt=""></a>-->
+                                <i class="fa fa-bolt fa-5x" aria-hidden="true" style="color:white" ></i>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="about-us.html">About us</a></li>
+                                    <li><a href="#">Categories</a>
+                                        <ul class="dropdown">
+                                            {% for category in categories %}
+                                            <li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="{% url 'home' %}?filter=new">New places</a></li>
+                                    {% if user.is_authenticated %}
+                                    <a style="color: white" href="{% url 'home' %}">{{ user.email }}</a>
+                                     <a style="color: white" href="{% url 'logout' %}">Logout</a>
+                                    {% else %}
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                    {% endif %}
+                                </ul>
+
+                                <!-- Social Button -->
+                                <div class="top-social-info">
+                                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    {% if user.is_authenticated %}
+                                    <a class="nav-link" href="{% url 'cart_detail' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- ##### Breadcumb Area Start ##### -->
         <div class="breadcumb-area bg-img bg-overlay2" style="background-image: url({{ category.image.url }});">
         <div class="bradcumbContent">
-            <h2>{{ category }}</h2>
+            <h2>{{ category.name }}</h2>
         </div>
     </div>
     <!-- bg gradients -->
@@ -36,7 +115,7 @@
                 <div class="col-12">
                     <!-- Upcoming Shows Content -->
                     <div class="upcoming-shows-content">
-                        {% for ticket in tickets %}
+                        {% for ticket in page_obj %}
                         <!-- Single Upcoming Shows -->
                         <div class="single-upcoming-shows d-flex align-items-center flex-wrap">
                             <div class="shows-date">
@@ -62,16 +141,18 @@
                                 {% if user.is_authenticated %}
                                 <form action="{% url 'cart_add' ticket.id %}" method="post">
                                     {{ cart_ticket_form }}
-                                {% csrf_token %}
+                                    {% csrf_token %}
 <!--                                    <a href="" class="btn musica-btn">Buy Tikets</a>-->
                                 <input type="submit" class="btn musica-btn" value="Buy Tikets">
-                            </form>
+                                </form>
                                 {% else %}
                                 <a href="{% url 'login' %}" class="btn musica-btn">Buy Tikets</a>
                                 {% endif %}
                             </div>
                         </div>
                         {% endfor %}
+
+
 
                         <nav aria-label="...">
   <ul class="pagination pagination-lg">
@@ -86,7 +167,6 @@
     {% endif %}
   </ul>
 </nav>
-
 
 
 

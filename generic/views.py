@@ -46,15 +46,19 @@ def get_queryset(self):
         queryset = queryset.filter(created__gte=start_date)
     return queryset
 
-def CategoryDetailView(request, *args, **kwargs):
+def CategoryDetailView(request,slug, *args, **kwargs,):
     category = kwargs.get('slug', None)
-    tickets = Ticket.objects.filter(category_id=category)
+    cats = Category.objects.get(slug=slug)
+    tickets = Ticket.objects.filter(category_id=slug)
     paginator = Paginator(tickets, 1)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'category-detail.html', locals())
 
+
+def blog(request):
+    return render(request, 'contact.html')
 
 
 

@@ -10,6 +10,7 @@ urlpatterns = [
     path('tickets/create/', TicketCreatedView.as_view(), name="create-ticket"),
     path('tickets/delete/<int:pk>/', TicketDeleteView.as_view(), name='delete-ticket'),
     path('tickets/edit/<int:pk>/', TicketEditView.as_view(), name='edit-ticket'),
+    path('blog', blog, name='blog'),
 
 
 

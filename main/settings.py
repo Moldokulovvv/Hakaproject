@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account',
     'cart',
     'orders',
+    'payment.apps.PaymentConfig'
 ]
 
 MIDDLEWARE = [
@@ -157,5 +158,17 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 CART_SESSION_ID = 'cart'
+
+# Настройки Braintree.
+BRAINTREE_MERCHANT_ID = 'wjh353pxkvy2kbmf' # ID продавца.
+BRAINTREE_PUBLIC_KEY = 'tzdg7dp6yf6287pj' # Публичный ключ.
+BRAINTREE_PRIVATE_KEY = '1605459e3b18ab9f4e249d3e07612647' # Секретный ключ.
+from braintree import Configuration, Environment
+Configuration.configure(
+Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
 
 

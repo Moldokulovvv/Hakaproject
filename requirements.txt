@@ -4,3 +4,5 @@ Pillow==7.1
 python-decouple
 django-ckeditor
 pytils
+celery==4.1.0
+braintree==3.45.0

@@ -58,7 +58,7 @@ def CategoryDetailView(request,slug, *args, **kwargs,):
 
 
 def blog(request):
-    return render(request, 'contact.html')
+    return render(request, 'blog.html')
 
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 
+from orders.models import Order
 
 
 class UserManager(BaseUserManager):
@@ -54,3 +55,13 @@ class User(AbstractBaseUser):
             self.create_activation_code()
         self.activation_code = code
         self.save(update_fields=['activation_code'])
+
+
+class Profile(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_id')
+    hobbi = models.CharField(max_length=100)
+    obomne = models.TextField()
+    lubimoe = models.CharField(max_length=50)
+
+
+

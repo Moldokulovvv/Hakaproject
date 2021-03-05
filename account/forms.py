@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from account.models import Profile
 from account.utils import send_activation_mail
 
 User = get_user_model()
@@ -37,3 +38,8 @@ class RegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+class ProfileForm(forms.Form):
+    class Meta:
+        model=Profile
+        fiellds = '__all__'

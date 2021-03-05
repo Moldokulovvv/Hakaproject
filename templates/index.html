@@ -69,9 +69,10 @@
 
                                     <li><a href="{% url 'home' %}?filter=new">New places</a></li>
                                     {% if user.is_authenticated %}
-                                    <a style="color: white" href="{% url 'home' %}">{{ user.email }}</a>
+                                    <a style="color: white" href="{% url 'profile' %}">{{ user.email }}</a>
                                      <a style="color: white" href="{% url 'logout' %}">Logout</a>
                                     {% else %}
+
                                     <li><a href="{% url 'login' %}">Login</a></li>
                                     <li><a href="{% url 'register' %}">Register</a></li>
                                     {% endif %}
@@ -165,7 +166,8 @@
                     <div class="section-heading">
                         <h2>Upcoming shows</h2>
                         {% if user.is_staff or user.is_superuser %}
-                        <a href="{% url 'create-ticket' %}"><button type="button">Добавить билет</button> </a>
+                        <a href="{% url 'create-ticket' %}" class="btn musica-btn">Add Ticket</a>
+
                         {% endif %}
                     </div>
                 </div>

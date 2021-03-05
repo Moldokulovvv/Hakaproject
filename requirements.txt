@@ -6,3 +6,10 @@ django-ckeditor
 pytils
 celery==4.1.0
 braintree==3.45.0
+WeasyPrint==0.42.3
+
+beautifulsoup4
+requests
+lxml
+
+django-crispy-forms

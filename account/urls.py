@@ -12,5 +12,5 @@ urlpatterns = [
     path('activation/', ActivationView.as_view(), name='activation'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('profile/', profile, name='profile'),
-    path('create/profile', ProfileCreatedView.as_view(), name='create_profile')
+    path('profile/create', ProfileCreatedView.as_view(), name='create_profile')
 ]

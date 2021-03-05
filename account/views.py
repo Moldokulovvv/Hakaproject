@@ -47,7 +47,7 @@ def profile(request):
 class ProfileCreatedView(CreateView):
     model = Profile
     form_class = ProfileForm
-    template_name = 'create_profile.html'
+    template_name = 'account/create_profile.html'
     success_url = reverse_lazy('home')
 
 

@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9k5s9x$1!a-i7qy1ehlpnkuon1qpdd^+a-d68sazarvi61647k'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -151,12 +151,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'account.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "adis.moldokulov@gmail.com"
-EMAIL_HOST_PASSWORD = "moldo275225"
+EMAIL_BACKEND = ''
+EMAIL_HOST = ""
+EMAIL_USE_TLS = 
+EMAIL_PORT = 
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
@@ -165,9 +165,9 @@ LOGOUT_REDIRECT_URL = 'home'
 CART_SESSION_ID = 'cart'
 
 # Настройки Braintree.
-BRAINTREE_MERCHANT_ID = 'wjh353pxkvy2kbmf' # ID продавца.
-BRAINTREE_PUBLIC_KEY = 'tzdg7dp6yf6287pj' # Публичный ключ.
-BRAINTREE_PRIVATE_KEY = '1605459e3b18ab9f4e249d3e07612647' # Секретный ключ.
+BRAINTREE_MERCHANT_ID = '' # ID продавца.
+BRAINTREE_PUBLIC_KEY = '' # Публичный ключ.
+BRAINTREE_PRIVATE_KEY = '' # Секретный ключ.
 from braintree import Configuration, Environment
 Configuration.configure(
 Environment.Sandbox,
@@ -177,5 +177,6 @@ Environment.Sandbox,
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 
